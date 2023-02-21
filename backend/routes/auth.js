@@ -6,7 +6,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const JWT_SECRET = "I.am*a&cOOL@DudE";
-//create a user using : POST "/api/auth/createuser"
+// Create a user using : POST "/api/auth/createuser"
 //  No Login required
 router.post(
   "/createuser",
@@ -55,9 +55,47 @@ router.post(
       // res.json(user);
     } catch (error) {
       console.error(error.message);
-      res.status(500).send("Some error occured!!!");
+      res.status(500).send("Internal Server Error!!!");
     }
   }
 );
+
+
+
+// Authenticate a user using : POST "/api/auth/login"
+router.post(
+  "/login",
+  [
+    body("email", "Enter a valid Email").isEmail(),
+    body("password", "Enter a valid Password").isLength({ min: 5 }).exists(),
+  ],
+  async (req, res) => {
+     // If there are errors , return bad requests and an error
+     const errors = validationResult(req);
+     if (!errors.isEmpty()) {
+       return res.status(400).json({ errors: errors.array() });
+      }
+
+      const{email, password} = req.body;
+      try{
+        let user = await User.findOne({email});
+        if(!user) return res.status(400).json({error:"Enter Valid Credentials."})
+        const passCompare = await bcrypt.compare(password,user.password);
+        if(!passCompare) return res.status(400).json({error:"Enter Valid Credentials."})
+        const data = {
+            user:{
+              id:user.id
+            }
+        }
+        const authToken = jwt.sign(data, JWT_SECRET);
+        res.json({authToken});
+      }
+      catch (error) {
+        console.error(error.message);
+        res.status(500).send("Internal Server Error!!!");
+      }
+    }
+)
+
 
 module.exports = router;
