@@ -39,9 +39,6 @@ router.post(
         password: secPass,
       });
 
-      //   .then(user => res.json(user))
-      //   .catch(err=>{console.log(err)
-
       const data = {
         user: {
           id: user.id,
@@ -50,10 +47,7 @@ router.post(
 
       const authToken = jwt.sign(data, JWT_SECRET);
       res.json({ authToken });
-      // res.json({error: "Please Enter Unique Email", message:err.message})});
-
-      // res.send(req.body)
-      // res.json(user);
+      
     } catch (error) {
       console.error(error.message);
       res.status(500).send("Internal Server Error!!!");
@@ -71,18 +65,27 @@ router.post(
   async (req, res) => {
     // If there are errors , return bad requests and an error
     const errors = validationResult(req);
+
+    //checking whether user has entered the password or not
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
 
+    // destructuring to get email and password from user in appropriate variables
     const { email, password } = req.body;
+
+    // checking whether email is exist in DB or not.
     try {
       let user = await User.findOne({ email });
       if (!user)
         return res.status(400).json({ error: "Enter Valid Credentials." });
-      const passCompare = await bcrypt.compare(password, user.password);
-      if (!passCompare)
-        return res.status(400).json({ error: "Enter Valid Credentials." });
+
+      // comparing entered password with password in db
+      const passCompare = await bcrypt.compare(password, user.password);// takes string and hashed string to compare
+
+      if (!passCompare) return res.status(400).json({ error: "Enter Valid Credentials." });
+        
+      // if password is correct then sending user data means giving access to account
       const data = {
         user: {
           id: user.id,
@@ -90,15 +93,19 @@ router.post(
       };
       const authToken = jwt.sign(data, JWT_SECRET);
       res.json({ authToken });
-    } catch (error) {
+    } 
+
+    // if email is not in DB then catch the error and send error
+    catch (error) {
       console.error(error.message);
       res.status(500).send("Internal Server Error!!!");
     }
   }
 );
 
-// Route 3 : Get logedin user details using : POST "/api/auth/getuser"   Login required
-router.post(
+// Route 3 : Get Logged in user details using : POST "/api/auth/getuser"   
+// Login required
+router.post(// using fetcghUser middleware
   "/getuser",fetchUser, async (req, res) => {
     try {
       const userId = req.user.id;
