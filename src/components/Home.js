@@ -1,11 +1,13 @@
-import React from "react";
+import React from 'react'
 
-function home() {
+
+const Home = () => {
   return (
     <div className="mx-3">
-      <h1>This is iNotebook</h1>
+      <h1>This is home </h1>
     </div>
-  );
+  )
 }
 
-export default home;
+export default Home
+
