@@ -1,3 +1,8 @@
+# Concepts
+Context API : Context API is a feature in React that allows data to be passed down  the coponents tree without having to pass it explicitly through each component. It provides a way to share data between components without the need for props drilling means passing data down through multiple levels of components.
+Context API allows the creation of a centralized store of data (known as a "context"), which can then be accessed by any component that needs it. This data can include things like user authentication status, theme settings, or any other global data that needs to be shared across the application.
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
