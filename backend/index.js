@@ -1,11 +1,12 @@
-const connectToMongo = require('./db')
-connectToMongo();
+
 
 
 const express = require('express')
 const app = express()
-const port = 3000
+const port = 8000
 
+const connectToMongo = require('./db')
+connectToMongo();
 // we want to use req.body so we are using middle ware 
 app.use(express.json())
 
