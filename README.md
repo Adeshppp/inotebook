@@ -2,6 +2,7 @@
 Context API : Context API is a feature in React that allows data to be passed down  the coponents tree without having to pass it explicitly through each component. It provides a way to share data between components without the need for props drilling means passing data down through multiple levels of components.
 Context API allows the creation of a centralized store of data (known as a "context"), which can then be accessed by any component that needs it. This data can include things like user authentication status, theme settings, or any other global data that needs to be shared across the application.
 
+useLocation hook : The useLocation hook is a built-in hook in the react-router-dom library that returns the current location object. The location object contains information about the current URL, such as the pathname, search query, and hash. we can access the path by using "location.pathname".
 
 # Getting Started with Create React App
 
