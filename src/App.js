@@ -2,6 +2,7 @@ import "./App.css";
 import Navbar from "./components/Navbar";
 import About from "./components/About";
 import NoteState from "./context/notes/NoteState";
+import Alert from "./components/Alert";
 
 import Home from "./components/Home";
 import React from "react";
@@ -12,6 +13,7 @@ function App() {
     <NoteState>
       <Router>
         <Navbar />
+        <Alert/>
         <div className="container">
         <Routes>
           <Route path="/about" element={<About />} />
