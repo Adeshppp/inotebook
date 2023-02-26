@@ -2,7 +2,7 @@ import { useState } from "react";
 import NoteContext from "./noteContext";
 
 const NoteState = (props)=>{
-    const notesInitial =[
+    let notesInitial =[
         {
           "_id": "63f8adb3c564b32089e7cd34",
           "user": "63f8943bdc6315def59db027",
@@ -71,16 +71,17 @@ const NoteState = (props)=>{
     // Add a note
     const addNote = (title,description,tag)=>{
         // to do api call
+        console.log("Adding a new note")
         const note={
             "_id": "63fa70d76e0c2a7d3bf25920",
             "user": "63f8943bdc6315def59db027",
-            "title": "added",
-            "description": "added",
-            "tag": "personal",
+            "title": title,
+            "description": description,
+            "tag": tag,
             "date": "2023-02-25T20:34:31.871Z",
             "__v": 0
           };
-        setNotes(notes.push(note))
+        setNotes(notes.concat(note))//.concat returns new array
     }
 
     // delete a note
