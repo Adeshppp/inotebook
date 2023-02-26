@@ -2,9 +2,75 @@ import { useState } from "react";
 import NoteContext from "./noteContext";
 
 const NoteState = (props)=>{
+    const notesInitial =[
+        {
+          "_id": "63f8adb3c564b32089e7cd34",
+          "user": "63f8943bdc6315def59db027",
+          "title": "My title updated",
+          "description": "My description  updated",
+          "tag": "personal",
+          "date": "2023-02-24T12:29:39.080Z",
+          "__v": 0
+        },
+        {
+          "_id": "63f8adb7c564b32089e7cd36",
+          "user": "63f8943bdc6315def59db027",
+          "title": "My title abcd",
+          "description": "My description  abcd",
+          "tag": "personal",
+          "date": "2023-02-24T12:29:43.089Z",
+          "__v": 0
+        },
+        {
+          "_id": "63f8adb7c564b32089e7cd38",
+          "user": "63f8943bdc6315def59db027",
+          "title": "My title",
+          "description": "My description",
+          "tag": "personal",
+          "date": "2023-02-24T12:29:43.737Z",
+          "__v": 0
+        },
+        {
+          "_id": "63f8adb8c564b32089e7cd3a",
+          "user": "63f8943bdc6315def59db027",
+          "title": "My title",
+          "description": "My description",
+          "tag": "personal",
+          "date": "2023-02-24T12:29:44.263Z",
+          "__v": 0
+        },
+        {
+          "_id": "63f8b4f08ba69c7d338dc42b",
+          "user": "63f8943bdc6315def59db027",
+          "title": "My title",
+          "description": "My description",
+          "tag": "personal",
+          "date": "2023-02-24T13:00:32.651Z",
+          "__v": 0
+        },
+        {
+          "_id": "63f8b4f18ba69c7d338dc42d",
+          "user": "63f8943bdc6315def59db027",
+          "title": "My title",
+          "description": "My description",
+          "tag": "personal",
+          "date": "2023-02-24T13:00:33.657Z",
+          "__v": 0
+        },
+        {
+          "_id": "63fa70d76e0c2a7d3bf25920",
+          "user": "63f8943bdc6315def59db027",
+          "title": "My title",
+          "description": "My description",
+          "tag": "personal",
+          "date": "2023-02-25T20:34:31.871Z",
+          "__v": 0
+        }
+      ]
+      const [notes, setNotes] = useState(notesInitial)
     
     return(
-        <NoteContext.Provider value={{}}>
+        <NoteContext.Provider value={{notes,setNotes}}>
             {props.children}
         </NoteContext.Provider>
     )
