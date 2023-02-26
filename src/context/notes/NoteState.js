@@ -86,10 +86,13 @@ const NoteState = (props)=>{
 
     // delete a note
     const deleteNote=(id)=>{
-        
+        console.log("deleting"+id)
+        let newNotes = notes.filter((note)=>{return note._id!==id})// creates a new array and returns all elements except element who has id === _id.
+        setNotes(newNotes)//.concat returns new array
+
     }
     // edit a note
-    const editNote=(id)=>{
+    const editNote=(id,title,description,tag)=>{
 
     }
     return(
