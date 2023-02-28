@@ -44,7 +44,7 @@ router.post('/addnote', fetchUser, [
 })
 
 
-// Route 3 : UPDATE and existing note : PUT "/api/notes/updatenote"
+// Route 3 : UPDATE an existing note : PUT "/api/notes/updatenote"
 // Login required
 router.put('/updatenote/:id', fetchUser, async (req, res) => {
 
@@ -86,7 +86,7 @@ router.put('/updatenote/:id', fetchUser, async (req, res) => {
 module.exports = router
 
 
-// Route 4 : DELETE and existing note using: delete "/api/notes/updatenote"
+// Route 4 : DELETE an existing note using: delete "/api/notes/updatenote"
 // Login required
 router.delete('/deletenote/:id', fetchUser, async (req, res) => {
 

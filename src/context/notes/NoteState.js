@@ -23,9 +23,13 @@ const NoteState = (props) => {
         });
         // const json=  response.json(); // parses JSON response into native JavaScript objects
         const json = await response.json();
-        setNotes(json);
+        const sortedNotes = json.sort((a, b) => new Date(b.date) - new Date(a.date));// code to sort notes by dates in descending order
+        setNotes(sortedNotes);
+
+        // setNotes(json);
     };
 
+    
 
     // ADD a note
     const addNote = async (title, description, tag) => {
@@ -41,19 +45,10 @@ const NoteState = (props) => {
             },
             body: JSON.stringify({ title, description, tag }), // body data type must match "Content-Type" header
         });
-        const json = await response.json(); // parses JSON response into native JavaScript objects
-
-        const note = {
-            _id: "63fa70d76e0c2a7d3bf25920",
-            user: "63f8943bdc6315def59db027",
-            title: title,
-            description: description,
-            tag: tag,
-            date: "2023-02-25T20:34:31.871Z",
-            __v: 0,
+        const note = await response.json(); // parses JSON response into native JavaScript objects
+        // setNotes(notes.concat(note)); //.concat returns new array
+        setNotes([note, ...notes]);
         };
-        setNotes(notes.concat(note)); //.concat returns new array
-    };
 
 
     // DELETE a note
