@@ -24,7 +24,7 @@ router.get('/fetchallnotes', fetchUser, async (req, res) => {
 
 router.post('/addnote', fetchUser, [
     body("title", "Enter a valid title").isLength({ min: 3 }),
-    body("description", "Enter a valid description").isLength({ min: 5 }),
+    body("description", "Enter a valid description").isLength({ min: 3 }),
 ], async (req, res) => {
     try {
         const { title, description, tag } = req.body;
