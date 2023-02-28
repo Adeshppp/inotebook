@@ -36,9 +36,9 @@ const Notes = () => {
   return (
     <>
       <AddNote />
-      <button type="button" className="btn btn-primary d-none" ref={ref} data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Launch demo modal
-      </button>
+      <button type="button" className="btn btn-primary d-none" ref={ref} data-bs-toggle="modal" data-bs-target="#exampleModal"/>
+        {/* Launch demo modal
+      </button> */}
       {/* giving reference to this button */}
       <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div className="modal-dialog" role="document">
@@ -78,7 +78,7 @@ const Notes = () => {
             {/* ===================================================================================================================== */}
 
             <div className="modal-footer">
-              <button ref={refClose} type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button ref={refClose} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
               <button type="button" className="btn btn-primary" onClick={UpdateOnClick}>Update Note</button>
             </div>
           </div>
