@@ -8,7 +8,8 @@ const NoteItem = (props) => {
 
     const { deleteNote } = context;
 
-    const { note , updateNote} = props;
+    const { note , updateNote} = props;// accessing as a props. updateNote definition is in Notes.js
+
     return (
         <div className="col-md-3">
             <div className="card my-3">
@@ -17,6 +18,7 @@ const NoteItem = (props) => {
                     <div>
                         <i className="fa-solid fa-trash mx-2" onClick={()=>{deleteNote(note._id)}}></i>
                         <i className="fa-sharp fa-solid fa-pen-to-square mx-2" onClick={()=>updateNote(note)}></i>
+                        {/* I am passing "note" parameter to call above on click methods so I used an arrow function. */}
                     </div>
                 </div>
                 <p className="card-text mx-3 mb-3">{note.description}</p>
