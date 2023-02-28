@@ -20,7 +20,7 @@ function AddNote() {
     }
 
     return (
-        <div>
+        <div>   
             <div className="container my-3">
                 <h1>Add a Note </h1>
                 <form>
@@ -37,6 +37,7 @@ function AddNote() {
                         <input type="text" className="form-control" onChange={handleOnChnage} id="tag" name="tag" />
                     </div>
                     <button type="submit" className="btn btn-primary" onClick={handleOnClick}>Add Note</button>
+
                 </form>
             </div>
 
