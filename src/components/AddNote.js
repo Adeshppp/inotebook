@@ -18,7 +18,6 @@ const AddNote = () => {
     } else alert("Title and description should be at least 3 characters long");
   };
 
-
   return (
     <div className="container my-3">
       <h2>Add a Note</h2>
@@ -48,7 +47,6 @@ const AddNote = () => {
             required
           />
         </div>
-
 
         <div className="form-group my-3">
           <label htmlFor="description">Tag</label>
