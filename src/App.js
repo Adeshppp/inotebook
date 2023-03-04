@@ -1,34 +1,38 @@
+// Importing CSS styles, components and context from their respective files
 import "./App.css";
 import Navbar from "./components/Navbar";
 import About from "./components/About";
 import NoteState from "./context/notes/NoteState";
 import Alert from "./components/Alert";
-
-import {Home} from "./components/Home";
+import { Home } from "./components/Home";
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
 
+// Defining App function component
 function App() {
+  // Setting up a state variable 'alert' and a function to update it
   const [alert, setAlert] = useState(null);
   const showAlert = (message, type) => {
-    console.log("message is ", message , " and type is ", type)
     setAlert({
       msg: message,
       type: type
-    })
+    });
+    // Setting up a timeout to hide the alert after 4 seconds
     setTimeout(() => {
-      console.log("timeout trigered")
-      setAlert(null)
-    }, 4000);
+      setAlert(null);
+    }, 1000);
   }
 
+  // Rendering the app
   return (
     <NoteState>
       <Router>
-        <Navbar />
-        <Alert alert={alert}/>
+        {/* Rendering Alert and Navbar components */}
+        <Alert alert={alert} />
+        <Navbar showAlert={showAlert} />
+        {/* Rendering Routes */}
         <div className="container">
           <Routes>
             <Route path="/about" element={<About />} />
@@ -42,4 +46,4 @@ function App() {
   );
 }
 
-export default App;
+export default App; // Exporting App function component
