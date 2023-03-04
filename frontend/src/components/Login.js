@@ -14,7 +14,7 @@ const Login = (props) => {
     const handleOnClick = async (e) => {
       e.preventDefault();
       // send a POST request to the server with user's email and password
-      const response = await fetch('http://localhost:8000/api/auth/login', {
+      const response = await fetch('https://inotebook-vyb8.onrender.com/api/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
