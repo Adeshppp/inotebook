@@ -5,7 +5,7 @@ import NoteItem from "./NoteItem";
 import AddNote from './AddNote'
 
 
-const Notes = () => {
+const Notes = (props) => {
   const context = useContext(noteContext);
   const { notes, getAllNotes, editNote } = context;
   useEffect(() => {// want to use this as a componentdidmount so i added below commented line
@@ -23,10 +23,15 @@ const Notes = () => {
   }
 
   const UpdateOnClick = (e) => {
-    if (note.etitle.length < 3 || note.edescription.length < 3) alert("Title and description should be at least 3 characters long");
+    // console.log("clicking update")
+    if (note.etitle.length < 3 || note.edescription.length < 3) { 
+      // refClose.current.click(); //modal covering an error on the screen
+      props.showAlert("Title and description should be at least 3 characters long!", "warning"); 
+    }
     else {
       editNote(note.id, note.etitle, note.edescription, note.etag)
       refClose.current.click();
+      props.showAlert("Content successfully updated!", "success");
     }
   }
 

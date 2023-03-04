@@ -1,15 +1,14 @@
 import React from 'react'
 import Notes from './Notes'
-const Home = () => {
-    
 
+export const Home = ({showAlert}) => {
+    
     return (
         <>
-        <Notes/>
+        <Notes showAlert={showAlert}/>
         </>
         
     )
 }
 
-export default Home
 

@@ -19,7 +19,7 @@ router.post(
   async (req, res) => {
     let success=false;
     // If there are errors , return bad requests and an error
-    console.log(req)
+    // console.log(req)
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({success, errors: errors.array() });
@@ -82,12 +82,12 @@ router.post(
     try {
       let user = await User.findOne({ email });
       if (!user)
-        return res.status(400).json({ success,error: "Enter Valid Credentials." });
+        return res.status(400).json({ success,error: "Invalid Credentials." });
 
       // comparing entered password with password in db
       const passCompare = await bcrypt.compare(password, user.password);// takes string and hashed string to compare
 
-      if (!passCompare) return res.status(400).json({success, error: "Enter Valid Credentials." });
+      if (!passCompare) return res.status(400).json({success, error: "Invalid Credentials." });
         
       // if password is correct then sending user data means giving access to account
       const data = {
