@@ -83,7 +83,6 @@ router.put('/updatenote/:id', fetchUser, async (req, res) => {
 
 
 })
-module.exports = router
 
 
 // Route 4 : DELETE an existing note using: delete "/api/notes/updatenote"

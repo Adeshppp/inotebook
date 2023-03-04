@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import noteContext from "../context/notes/noteContext";
 
-const AddNote = () => {
+const AddNote = ({showAlert}) => {
   const context = useContext(noteContext);
   const { addNote } = context;
 
@@ -15,11 +15,12 @@ const AddNote = () => {
     if (note.title.length >= 3 && note.description.length >= 3) {
       addNote(note.title, note.description, note.tag);
       setNote({ title: "", description: "", tag: "" });
-    } else alert("Title and description should be at least 3 characters long");
+      showAlert("Note successfully Added!","success");
+    } else showAlert("Title and description should be at least 3 characters long!","warning");
   };
 
   return (
-    <div className="container my-3">
+    <div className="container my-5">
       <h2>Add a Note</h2>
       <form>
         <div className="form-group my-3">

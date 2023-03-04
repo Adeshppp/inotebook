@@ -16,8 +16,7 @@ const NoteState = (props) => {
             method: "GET", // *GET, POST, PUT, DELETE, etc.
             headers: {
                 "Content-Type": "application/json",
-                "auth-token":
-                    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjNmODk0M2JkYzYzMTVkZWY1OWRiMDI3In0sImlhdCI6MTY3NzIzNjc0NX0.LRzFTSSbHGcGFRurRFy8ZNFl9B1u2WX_6UlvPRioE1M",
+                "auth-token":localStorage.getItem("token"),
                 // 'Content-Type': 'application/x-www-form-urlencoded',
             },
         });
@@ -39,8 +38,7 @@ const NoteState = (props) => {
             method: "POST", // *GET, POST, PUT, DELETE, etc.
             headers: {
                 "Content-Type": "application/json",
-                "auth-token":
-                    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjNmODk0M2JkYzYzMTVkZWY1OWRiMDI3In0sImlhdCI6MTY3NzIzNjc0NX0.LRzFTSSbHGcGFRurRFy8ZNFl9B1u2WX_6UlvPRioE1M",
+                "auth-token":localStorage.getItem("token"),
                 // 'Content-Type': 'application/x-www-form-urlencoded',
             },
             body: JSON.stringify({ title, description, tag }), // body data type must match "Content-Type" header
@@ -58,8 +56,7 @@ const NoteState = (props) => {
             method: "DELETE", // *GET, POST, PUT, DELETE, etc.
             headers: {
                 "Content-Type": "application/json",
-                "auth-token":
-                    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjNmODk0M2JkYzYzMTVkZWY1OWRiMDI3In0sImlhdCI6MTY3NzIzNjc0NX0.LRzFTSSbHGcGFRurRFy8ZNFl9B1u2WX_6UlvPRioE1M",
+                "auth-token":localStorage.getItem("token"),
                 // 'Content-Type': 'application/x-www-form-urlencoded',
             },
         });
@@ -83,7 +80,7 @@ const NoteState = (props) => {
             headers: {
                 "Content-Type": "application/json",
                 "auth-token":
-                    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjNmODk0M2JkYzYzMTVkZWY1OWRiMDI3In0sImlhdCI6MTY3NzIzNjc0NX0.LRzFTSSbHGcGFRurRFy8ZNFl9B1u2WX_6UlvPRioE1M",
+                    localStorage.getItem("token"),
                 // 'Content-Type': 'application/x-www-form-urlencoded',
             },
             body: JSON.stringify({ title, description, tag }), // body data type must match "Content-Type" header
