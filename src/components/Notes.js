@@ -23,22 +23,25 @@ const Notes = () => {
   }
 
   const UpdateOnClick = (e) => {
-    editNote(note.id, note.etitle, note.edescription, note.etag)
-    refClose.current.click();
+    if (note.etitle.length < 3 || note.edescription.length < 3) alert("Title and description should be at least 3 characters long");
+    else {
+      editNote(note.id, note.etitle, note.edescription, note.etag)
+      refClose.current.click();
+    }
   }
 
   // ... is spread operator
   // means keep tha values which are there in note object and add/overwrite properties listed next.
   const handleOnChnage = (e) => {
-    setNote({ ...note, [e.target.name]: e.target.value })//changing event should change to its value
+    setNote({ ...note, [e.target.name]: e.target.value })//changing event should set its value
   }
 
   return (
     <>
       <AddNote />
-      <button type="button" className="btn btn-primary d-none" ref={ref} data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Launch demo modal
-      </button>
+      <button type="button" className="btn btn-primary d-none" ref={ref} data-bs-toggle="modal" data-bs-target="#exampleModal" />
+      {/* Launch demo modal
+      </button> */}
       {/* giving reference to this button */}
       <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div className="modal-dialog" role="document">
@@ -60,11 +63,20 @@ const Notes = () => {
                   <form>
                     <div className="form-group my-3">
                       <label htmlFor="title">Title</label>
-                      <input type="text" className="form-control" onChange={handleOnChnage} value={note.etitle} id="etitle" name="etitle" aria-describedby="emailHelp" />
+                      <input type="text" className="form-control" onChange={handleOnChnage} value={note.etitle} id="etitle" name="etitle" aria-describedby="emailHelp" required />
                     </div>
                     <div className="form-group my-3">
                       <label htmlFor="description">Description</label>
-                      <input type="text" className="form-control" onChange={handleOnChnage} value={note.edescription} id="edescription" name="edescription" />
+                      <textarea
+                        className="form-control"
+                        id="edescription"
+                        name="edescription"
+                        onChange={handleOnChnage}
+                        value={note.edescription}
+                        rows={note.edescription ? Math.ceil(note.edescription.length / 150) : 1}
+                        style={{ resize: "none" }}
+                        required
+                      />
                     </div>
                     <div className="form-group my-3">
                       <label htmlFor="description">Tag</label>
@@ -78,7 +90,7 @@ const Notes = () => {
             {/* ===================================================================================================================== */}
 
             <div className="modal-footer">
-              <button ref={refClose} type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button ref={refClose} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
               <button type="button" className="btn btn-primary" onClick={UpdateOnClick}>Update Note</button>
             </div>
           </div>
@@ -88,6 +100,8 @@ const Notes = () => {
 
       <div className="row my-3">
         <h1>Your Notes</h1>
+        <div className="container my-3 mx-1">
+          {notes.length === 0 && "No notes to display"}</div>
         {notes.map((note) => {
           return <NoteItem key={note._id} updateNote={updateNote} note={note} />;
         })}

@@ -17,16 +17,18 @@ router.post(
     body("password", "Enter a valid Password").isLength({ min: 5 }),
   ],
   async (req, res) => {
+    let success=false;
     // If there are errors , return bad requests and an error
+    console.log(req)
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      return res.status(400).json({success, errors: errors.array() });
     }
 
     //check whether user with same email exists
     try {
       let user = await User.findOne({ email: req.body.email });
-      if (user) return res.status(400).json({ error: " Email already exists" });
+      if (user) return res.status(400).json({success, error: " Email already exists" });
 
       const salt = await bcrypt.genSalt(10);
       console.log("salt is ", salt);
@@ -46,7 +48,8 @@ router.post(
       };
 
       const authToken = jwt.sign(data, JWT_SECRET);
-      res.json({ authToken });
+      success=true;
+      res.json({success, authToken });
       
     } catch (error) {
       console.error(error.message);
@@ -63,12 +66,13 @@ router.post(
     body("password", "Enter a valid Password").isLength({ min: 5 }).exists(),
   ],
   async (req, res) => {
+    let success=false;
     // If there are errors , return bad requests and an error
     const errors = validationResult(req);
 
     //checking whether user has entered the password or not
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      return res.status(400).json({success, errors: errors.array() });
     }
 
     // destructuring to get email and password from user in appropriate variables
@@ -78,12 +82,12 @@ router.post(
     try {
       let user = await User.findOne({ email });
       if (!user)
-        return res.status(400).json({ error: "Enter Valid Credentials." });
+        return res.status(400).json({ success,error: "Enter Valid Credentials." });
 
       // comparing entered password with password in db
       const passCompare = await bcrypt.compare(password, user.password);// takes string and hashed string to compare
 
-      if (!passCompare) return res.status(400).json({ error: "Enter Valid Credentials." });
+      if (!passCompare) return res.status(400).json({success, error: "Enter Valid Credentials." });
         
       // if password is correct then sending user data means giving access to account
       const data = {
@@ -92,7 +96,8 @@ router.post(
         },
       };
       const authToken = jwt.sign(data, JWT_SECRET);
-      res.json({ authToken });
+      success=true;
+      res.json({success, authToken });
     } 
 
     // if email is not in DB then catch the error and send error
