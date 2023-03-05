@@ -1,6 +1,3 @@
-
-
-
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -68,38 +65,38 @@ const Signup = (props) => {
         }
 
         // set errors and submit form if no errors
-        if (Object.keys(errors).length > 0) {
-            setFormErrors(errors)
-        } else {
-            handleOnClick(e)
-        }
+        if (Object.keys(errors).length > 0) setFormErrors(errors)
+        else handleOnClick(e)
     }
 
     return (
-        <div className="container">
+        <div className="container mt-5">
+            <h2>Continue to create your account</h2>
+                <div className="mt-3">
             <form onSubmit={handleOnSubmit}>
                 <div className="form-group my-3">
-                    <label htmlFor="name">Name</label>
+                    <label className="my-1" htmlFor="name">Name</label>
                     <input type="text" className={`form-control ${formErrors.name ? 'is-invalid' : ''}`} name="name" id="name" value={credentials.name} onChange={handleOnChange} placeholder="Enter Name" required />
                     {formErrors.name && <div className="invalid-feedback">{formErrors.name}</div>}
                 </div>
                 <div className="form-group my-3">
-                    <label htmlFor="exampleInputEmail1">Email address</label>
+                    <label className="my-1" htmlFor="exampleInputEmail1">Email address</label>
                     <input type="email" className={`form-control ${formErrors.email ? 'is-invalid' : ''}`} name="email" id="email" value={credentials.email} onChange={handleOnChange} aria-describedby="emailHelp" placeholder="Enter email" required />
                     {formErrors.email && <div className="invalid-feedback">{formErrors.email}</div>}
                 </div>
                 <div className="form-group my-3">
-                    <label htmlFor="password">Password</label>
+                    <label className="my-1" htmlFor="password">Password</label>
                     <input type="password" className={`form-control ${formErrors.password ? 'is-invalid' : ''}`} name="password" id="password" value={credentials.password} onChange={handleOnChange} placeholder="Password" required />
                     {formErrors.password && <div className="invalid-feedback">{formErrors.password}</div>}
                 </div>
 
 
                 <div className="form-group my-3">
-                    <label htmlFor="exampleInputEmail1">Email address</label>
+                    <label className="my-1" htmlFor="exampleInputEmail1">Email address</label>
                     <input type="password" className={`form-control ${formErrors.cpassword ? 'is-invalid' : ''}`} name="cpassword" id="passcpasswordword" value={credentials.cpassword} onChange={handleOnChange} placeholder="Confirm Password" required />
                     {formErrors.cpassword && <div className="invalid-feedback">{formErrors.cpassword}</div>}
                 </div>
+                
 
                 {credentials.password && credentials.cpassword && credentials.password === credentials.cpassword ? (
                     <p>Passwords match!</p>
@@ -110,6 +107,7 @@ const Signup = (props) => {
 
                 <button type="submit" className="btn btn-primary">Submit</button>
             </form>
+            </div>
         </div>
     )
 }

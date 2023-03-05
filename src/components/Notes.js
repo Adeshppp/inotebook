@@ -2,15 +2,18 @@ import { useContext, useEffect, useRef, useState } from "react";
 //using useRef hook to give reference to our modal variable
 import noteContext from "../context/notes/noteContext";
 import NoteItem from "./NoteItem";
-import AddNote from './AddNote'
+import AddNote from './AddNote';
+import { useNavigate } from "react-router-dom";
 
 
-const Notes = (props) => {
+
+const Notes = ({showAlert}) => {
+  let navigate=useNavigate();
   const context = useContext(noteContext);
   const { notes, getAllNotes, editNote } = context;
   useEffect(() => {// want to use this as a componentdidmount so i added below commented line
-    getAllNotes()
-    // eslint-disable-next-line
+    if(localStorage.getItem('token')) getAllNotes()
+    else navigate("/login")
   }, [])
 
   const ref = useRef(null)
@@ -26,12 +29,12 @@ const Notes = (props) => {
     // console.log("clicking update")
     if (note.etitle.length < 3 || note.edescription.length < 3) { 
       // refClose.current.click(); //modal covering an error on the screen
-      props.showAlert("Title and description should be at least 3 characters long!", "warning"); 
+      showAlert("Title and description should be at least 3 characters long!", "warning"); 
     }
     else {
       editNote(note.id, note.etitle, note.edescription, note.etag)
       refClose.current.click();
-      props.showAlert("Content successfully updated!", "success");
+      showAlert("Note successfully updated!", "success");
     }
   }
 
@@ -43,7 +46,7 @@ const Notes = (props) => {
 
   return (
     <>
-      <AddNote />
+      <AddNote showAlert={showAlert}/>
       <button type="button" className="btn btn-primary d-none" ref={ref} data-bs-toggle="modal" data-bs-target="#exampleModal" />
       {/* Launch demo modal
       </button> */}
@@ -103,12 +106,12 @@ const Notes = (props) => {
       </div>
 
 
-      <div className="row my-3">
-        <h1>Your Notes</h1>
-        <div className="container my-3 mx-1">
+      <div className="row mt-2">
+        <h2>Your Notes</h2>
+        <div className="container mt-1 mx-1">
           {notes.length === 0 && "No notes to display"}</div>
         {notes.map((note) => {
-          return <NoteItem key={note._id} updateNote={updateNote} note={note} />;
+          return <NoteItem key={note._id} updateNote={updateNote} showAlert={showAlert} note={note} />;
         })}
       </div>
     </>
